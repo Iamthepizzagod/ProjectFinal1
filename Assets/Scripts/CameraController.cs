@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour {
 	public GameObject target;
 
 	// targetPosition = the player's x, y
-	private Vector2 targetPosition;
+	private Vector3 targetPosition;
 
 	public float smoothing;
 
@@ -27,14 +27,14 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 	
-		targetPosition = new Vector2 (target.transform.position.x, target.transform.position.y);
+		targetPosition = new Vector3 (target.transform.position.x, target.transform.position.y,-5f);
 
 		if (target.transform.localScale.x > 0f) {
 			// facing right
-			targetPosition = new Vector2 (targetPosition.x + followAhead, targetPosition.y);
+			targetPosition = new Vector3 (targetPosition.x + followAhead, targetPosition.y, -5);
 		} else {
 			// facing left
-			targetPosition = new Vector2 (targetPosition.x - followAhead, targetPosition.y);
+			targetPosition = new Vector3 (targetPosition.x - followAhead, targetPosition.y, -5);
 		}
 
 		//transform.position = targetPosition;

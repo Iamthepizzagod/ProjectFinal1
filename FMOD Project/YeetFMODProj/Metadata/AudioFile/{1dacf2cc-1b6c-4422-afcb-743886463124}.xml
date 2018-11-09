@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{1dacf2cc-1b6c-4422-afcb-743886463124}">
+        <property name="assetPath">
+            <value>8bit_Death_Falling.ogg</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.0680498866213153</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{8e0c545a-34a6-4170-be29-dc201b332cd0}</destination>
+        </relationship>
+    </object>
+</objects>
