@@ -9,6 +9,9 @@ public class playerController : MonoBehaviour
 
     public float moveSpeed;
     public float jumpSpeed;
+    public bool isRun;
+    public GameObject throwingWeaponOne;
+    private bool facingRight;
 
     private Rigidbody2D myRigidBody;
 
@@ -40,7 +43,7 @@ public class playerController : MonoBehaviour
         {
             myRigidBody.velocity = new Vector2(moveSpeed, myRigidBody.velocity.y);
             transform.localScale = new Vector2(1f, 1f);
-
+            facingRight = true;
             //Move Left
 
         }
@@ -48,6 +51,7 @@ public class playerController : MonoBehaviour
         {
             myRigidBody.velocity = new Vector2(-moveSpeed, myRigidBody.velocity.y);
             transform.localScale = new Vector2(-1f, 1f);
+            facingRight = false;
         }
         //No sliding 
         else
@@ -61,20 +65,33 @@ public class playerController : MonoBehaviour
         {
             myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, jumpSpeed);
         }
+        else if (Input.GetButtonDown("Jump") && isGrounded && isRun)
+        {
+            myRigidBody.velocity = new Vector2(myRigidBody.velocity.x + 10, jumpSpeed);
+        }
 
         //Run
         if (Input.GetButton("Run") && Input.GetAxisRaw("Horizontal") > 0f && isGrounded)
         {
             myRigidBody.velocity = new Vector2(moveSpeed + 10, myRigidBody.velocity.y);
+            isRun = true;
         }
         else if (Input.GetButton("Run") && Input.GetAxisRaw("Horizontal") < 0f && isGrounded)
         {
             myRigidBody.velocity = new Vector2(-moveSpeed - 10, myRigidBody.velocity.y);
+            isRun = true;
+        }
+        else
+        {
+            isRun = false;
         }
 
-
+        //shoot throwing weapon
+        if (Input.GetButton("Shoot"))
+        {
+            Instantiate(throwingWeaponOne, transform.position, Quaternion.identity);
+        }
     }
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -103,7 +120,10 @@ public class playerController : MonoBehaviour
             transform.parent = null;
     }
 
-
+    public bool isFacingRight()
+    {
+        return facingRight;
+    }
 
 
 
