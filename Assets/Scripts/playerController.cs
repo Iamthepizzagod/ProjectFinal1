@@ -57,8 +57,6 @@ public class playerController : MonoBehaviour
         else
         {
             myRigidBody.velocity = new Vector2(0f, myRigidBody.velocity.y);
-
-
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -89,7 +87,11 @@ public class playerController : MonoBehaviour
         //shoot throwing weapon
         if (Input.GetButton("Shoot"))
         {
-            Instantiate(throwingWeaponOne, transform.position, Quaternion.identity);
+            StartCoroutine(ThrowingDelay());
+            if(facingRight)
+                Instantiate(throwingWeaponOne, transform.position * 1, Quaternion.identity);
+            else
+                Instantiate(throwingWeaponOne, transform.position * -1, Quaternion.identity);
         }
     }
 
@@ -126,7 +128,11 @@ public class playerController : MonoBehaviour
     }
 
 
-
+    IEnumerator ThrowingDelay()
+    {
+        yield return new WaitForSeconds(2);
+        yield return 0; 
+    }
 }
 
 

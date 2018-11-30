@@ -18,9 +18,9 @@ TagManager:
   - 
   - 
   - ground
-  - 
-  - 
-  - 
+  - backround
+  - weapon
+  - player
   - 
   - 
   - 
@@ -44,4 +44,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: backround
+    uniqueID: 649213395
+    locked: 0
+  - name: ground
+    uniqueID: 1984201955
+    locked: 0
+  - name: character
+    uniqueID: 2396877967
+    locked: 0
+  - name: foreground
+    uniqueID: 3060329331
     locked: 0

@@ -13,17 +13,18 @@ public class ThrowingWeapon : MonoBehaviour {
 	void Start () {
        rb = GetComponent<Rigidbody2D>();
        rightOrLeft = player.isFacingRight();
+        
 }
 
 // Update is called once per frame
 void FixedUpdate () {
         if (rightOrLeft)
         {
-            rb.AddForce(Vector2.right);
+            rb.AddForce(Vector2.right*speed);
         }
         else
         {
-            rb.AddForce(Vector2.left);
+            rb.AddForce(Vector2.left*speed);
         }
     }
 
