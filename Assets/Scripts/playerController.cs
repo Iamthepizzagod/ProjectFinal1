@@ -21,6 +21,8 @@ public class playerController : MonoBehaviour
     public float groundCheckRadius; //Radius of groundcheck
     public LayerMask whatIsGround; //what layer can the player jump
     public bool isGrounded; //Is the player grounded
+    public float fireRate;
+    private double lastShot = 0.0;
 
 
     // Use this for initialization
@@ -87,11 +89,7 @@ public class playerController : MonoBehaviour
         //shoot throwing weapon
         if (Input.GetButton("Shoot"))
         {
-            StartCoroutine(ThrowingDelay());
-            if(facingRight)
-                Instantiate(throwingWeaponOne, transform.position * 1, Quaternion.identity);
-            else
-                Instantiate(throwingWeaponOne, transform.position * -1, Quaternion.identity);
+            Fire();
         }
     }
 
@@ -128,11 +126,20 @@ public class playerController : MonoBehaviour
     }
 
 
-    IEnumerator ThrowingDelay()
+    private void Fire()
     {
-        yield return new WaitForSeconds(2);
-        yield return 0; 
+        if (Time.time > fireRate + lastShot)
+        {
+            if (facingRight)
+                Instantiate(throwingWeaponOne, transform.position + (Vector3.up * 1) + (Vector3.right * 2), Quaternion.identity);
+            else
+                Instantiate(throwingWeaponOne, transform.position + (Vector3.up * 1) + (Vector3.left * 2), Quaternion.identity);
+            lastShot = Time.time;
+        }
+
     }
+
+
 }
 
 
