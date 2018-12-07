@@ -12,6 +12,7 @@ public class playerController : MonoBehaviour
     public bool isRun;
     public GameObject throwingWeaponOne;
     private bool facingRight;
+    private bool playWoosh = true;
 
     private Rigidbody2D myRigidBody;
 
@@ -24,12 +25,17 @@ public class playerController : MonoBehaviour
     public float fireRate;
     private double lastShot = 0.0;
 
+    FMOD.Studio.EventInstance jumpSound;
+    FMOD.Studio.EventInstance wooshSound;
+
 
     // Use this for initialization
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
+        jumpSound = FMODUnity.RuntimeManager.CreateInstance("event:/Character/JumpTemp");
+        wooshSound = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Woosh");
     }
 
     // Update is called once per frame
@@ -64,6 +70,7 @@ public class playerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, jumpSpeed);
+            jumpSound.start();
         }
         else if (Input.GetButtonDown("Jump") && isGrounded && isRun)
         {
